@@ -1,7 +1,5 @@
 # anaDB
 
-<style>p{text-indent:2em;}</style>
-
 ## 使用[Intellij Idea](https://www.jetbrains.com/idea/)调试运行
 
 1. 克隆项目到本地

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+<configuration>
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level [%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/kairosdb.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/kairosdb.%d.%i.log.gz</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+
+			<!-- or whenever the file size reaches 100MB -->
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+
+			<!-- Whenever startup, will run the rollover -->
+			<!--<cleanHistoryOnStart>true</cleanHistoryOnStart>-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{MM-dd|HH:mm:ss.SSS} [%thread] %-5level [%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="failed_data" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/failed.log</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>TRACE</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/failed.%d.%i.log.gz</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+
+			<!-- or whenever the file size reaches 100MB -->
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{MM-dd|HH:mm:ss.SSS} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="failed_logger" level="TRACE" additivity="true">
+		<appender-ref ref="failed_data"/>
+	</logger>
+
+	<logger name="org.kairosdb.datastore.h2.orm" level="WARN"/>
+
+	<logger name="org.apache.kafka.streams.processor.internals" level="WARN"/>
+
+	<!--<logger name="org.hbase.async.RegionClient" level="DEBUG"/>-->
+
+	<!--<logger name="org.kairosdb.core.aggregator.SumAggregator" level="DEBUG"/>
+	<logger name="org.kairosdb.datastore.cassandra.CassandraDatastore" level="DEBUG"/>-->
+
+	<!--<logger name="org.kairosdb.core.http.rest.MetricsResource" level="DEBUG"/>-->
+
+	<root level="INFO">
+		<appender-ref ref="stdout"/>
+		<appender-ref ref="logfile"/>
+	</root>
+</configuration>

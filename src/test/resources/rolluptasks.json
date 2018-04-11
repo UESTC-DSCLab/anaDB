@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Rollup1",
+    "execution_interval": {
+      "value": 1,
+      "unit": "hours"
+    },
+    "rollups": [
+      {
+        "save_as": "kairosdb.http.query_time_rollup",
+        "query": {
+          "cache_time": 0,
+          "start_relative": {
+            "value": "1",
+            "unit": "hours"
+          },
+          "metrics": [
+            {
+              "name": "kairosdb.http.query_time",
+              "limit": 10000,
+              "tags": {
+                "host": [
+                  "foo",
+                  "bar"
+                ]
+              },
+              "group_by": [
+                {
+                  "name": "tag",
+                  "tags": ["group1", "group2"]
+                }
+              ],
+              "aggregators": [
+                {
+                  "name": "sum",
+                  "sampling": {
+                    "value": 10,
+                    "unit": "minutes"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Rollup2",
+    "execution_interval": {
+      "value": 1,
+      "unit": "minutes"
+    },
+    "rollups": [
+      {
+        "save_as": "kairosdb.http.foo_rollup",
+        "query": {
+          "cache_time": 0,
+          "start_relative": {
+            "value": "1",
+            "unit": "hours"
+          },
+          "metrics": [
+            {
+              "name": "kairosdb.http.foo",
+              "limit": 10000,
+              "tags": {
+                "host": [
+                  "foo",
+                  "bar"
+                ]
+              },
+              "group_by": [
+                {
+                  "name": "tag",
+                  "tags": ["group3", "group4"]
+                }
+              ],
+              "aggregators": [
+                {
+                  "name": "sum",
+                  "sampling": {
+                    "value": 24,
+                    "unit": "hours"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

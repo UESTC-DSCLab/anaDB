@@ -46,3 +46,9 @@ $ ./bin/cassandra -f
 打开`Intellij Idea`菜单栏中的`Run`，选择`Run 'main'`(main为你在第5步设置的`Name`)。
 
 也可以通过右上方的几个绿色按钮`启动项目`或者`调试项目`，在代码左侧行号处点击设置断点。
+
+## 一键安装运行Cassandra和KairosDB 
+
+下载`install.sh`和`start.sh`到一个单独的文件夹内（等下将会把下载到的`Cassandra`和`KairosDB`都放到该文件夹下面），然后运行`install.sh`即可。
+
+如果运行`install.sh`的过程中你选择了不启动kairosDB，你可以通过运行`start.sh`来启动他们。

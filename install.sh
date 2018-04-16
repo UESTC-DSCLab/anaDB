@@ -4,12 +4,12 @@
 # and KairosDB from https://github.com/kairosdb/kairosdb/releases/download/v1.2.1/kairosdb-1.2.1-1.tar.gz
 
 echo "Downloading and Extracting Cassandra..."
-wget -qO- http://mirror.bit.edu.cn/apache/cassandra/3.11.2/apache-cassandra-3.11.2-bin.tar.gz | tar -xz
+wget -O- http://mirror.bit.edu.cn/apache/cassandra/3.11.2/apache-cassandra-3.11.2-bin.tar.gz | tar -xz
 mv apache-cassandra-3.11.2 cassandra
 
 echo "Downloading and Extracting KairosDB..."
 echo "Download from GitHub, so it may take some minutes..."
-wget -qO- https://github.com/kairosdb/kairosdb/releases/download/v1.2.1/kairosdb-1.2.1-1.tar.gz | tar -xz
+wget -O- https://github.com/kairosdb/kairosdb/releases/download/v1.2.1/kairosdb-1.2.1-1.tar.gz | tar -xz
 
 # modify kairosDB's configuration to use cassandra
 CurDIR=$(pwd)

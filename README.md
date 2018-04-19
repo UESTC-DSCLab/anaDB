@@ -49,6 +49,23 @@ $ ./bin/cassandra -f
 
 ## 一键安装运行Cassandra和KairosDB 
 
-下载`install.sh`和`start.sh`到一个单独的文件夹内（等下将会把下载到的`Cassandra`和`KairosDB`都放到该文件夹下面），然后运行`install.sh`即可。
+1. 下载安装脚本
 
-如果运行`install.sh`的过程中你选择了不启动kairosDB，你可以通过运行`start.sh`来启动他们。
+下载`一键安装`文件夹内的`install.sh`和`start.sh`，并放到此项目外的某个空文件夹内。（在此项目目录下运行会导致下载到的内容处于该项目版本控制下）。
+
+2. 安装并运行
+
+在命令行启动`install.sh`脚本。
+
+```bash
+$ ./install.sh
+```
+
+该脚本会自动下载并解压cassandra和kairosdb，并且会修改kairosdb的配置文件，使kairosdb使用cassandra作为存储引擎。
+
+同时该脚本在下载完成之后会询问你是否启动cassandra和kairosdb，你可以选择y来启动，也可以选择n（不启动）。
+
+随后，你可以通过运行`start.sh`脚本来启动他们。
+```bash
+$ ./start.sh
+```

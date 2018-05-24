@@ -36,6 +36,19 @@ fi
 # 解压kairosdb
 tar -zxf kairosdb-1.2.1-1.tar.gz && rm kairosdb-1.2.1-1.tar.gz
 
+# 安装Grafana
+sudo dpkg -i grafana_5.1.3_amd64.deb 
+
+# 配置Grafana-service
+sudo /bin/systemctl enable grafana-server.service
+
+# 安装grafana数据库插件
+echo "开始安装Grafana插件，支持时序数据库将数据导入Grafana"
+sudo grafana-cli plugins install grafana-kairosdb-datasource
+
+echo "安装完毕，重启grafana完成安装"
+sudo service grafana-server restart
+
 # 记住当前目录
 CurDIR=$(pwd) 
 
